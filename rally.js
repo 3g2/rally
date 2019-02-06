@@ -9,6 +9,24 @@ function calculateMousePos (evt) {
 	};
 }
 
+window.onload = function() {
+	console.log("Chicken");
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
+	
+	var fps = 60;
+		setInterval(function() {
+			drawEverything();
+			moveEverything();
+		}, 1000/fps);
+
+		canvas.addEventListener('mousemove',
+			function (evt) {
+				var mousePos = calculateMousePos(evt);
+				paddle1Y = mousePos.y - (PADDLEHEIGHT/2);
+			});
+}
+
 function computerMovement() {
 	
 	var paddle2YCenter = paddle2Y + (PADDLEHEIGHT/2);
