@@ -1,3 +1,19 @@
+var canvas;
+var canvasContext;
+var ballX = 50;
+var ballY = 50;
+var ballSpeedX = 10;
+var ballSpeedY = 10;
+
+var paddle1Y = 250;
+var paddle2Y = 250;
+
+var playerOneScore = 0;
+var playerTwoScore = 0;
+
+const PADDLEHEIGHT = 100;
+const PADDLETHICKNESS = 10;
+
 function calculateMousePos (evt) {
 	var rect = canvas.getBoundingClientRect();
 	var root = document.documentElement;
