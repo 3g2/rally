@@ -117,3 +117,16 @@ function colorRect(leftX, topY, width, height, drawColor) {
 	canvasContext.fillStyle = drawColor;
 	canvasContext.fillRect(leftX, topY, width, height);
 } 
+
+function drawEverything () {
+
+	colorRect(0, 0, canvas.width, canvas.height, 'black');
+	colorRect(0, paddle1Y, PADDLETHICKNESS, PADDLEHEIGHT, 'white');
+	colorRect(canvas.width - PADDLETHICKNESS, paddle2Y, PADDLETHICKNESS, PADDLEHEIGHT, 'white');
+	
+	colorCircle(ballX, ballY, 15, 'blue'); 
+
+	canvasContext.fillText(playerOneScore, 100, 100);
+	canvasContext.fillText(playerTwoScore, canvas.width-100, 100);
+
+}
