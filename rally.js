@@ -1,3 +1,6 @@
+const PLAYER_ONE = 1;
+const PLAYER_TWO = 2;
+
 var canvas;
 var canvasContext;
 var ballX = 50;
@@ -11,8 +14,8 @@ var paddle2Y = 250;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 
-const PADDLEHEIGHT = 100;
-const PADDLETHICKNESS = 10;
+const PADDLE_HEIGHT = 100;
+const PADDLE_THICKNESS = 10;
 
 function calculateMousePos (evt) {
 	var rect = canvas.getBoundingClientRect();
@@ -53,11 +56,18 @@ function computerMovement() {
 		}
     }
 
-    function ballReset() {
-        ballX = canvas.width/2;
-        ballY = canvas.height/2;
-        ballSpeedX = -3;
-    } 
+function ballReset(player) {
+    ballX = canvas.width/2;
+    ballY = canvas.height/2;
+    ballSpeedY = 0;
+
+    if (player === PLAYER_ONE) {
+        ballSpeedX = 10;
+    }
+    else {
+        ballspeedX = -10;
+    }
+} 
 
     function moveEverything () {
     computerMovement();
@@ -76,7 +86,7 @@ function computerMovement() {
         }
     
         else {
-            ballReset();
+            ballReset(PLAYER_TWO);
             playerTwoScore++;
             } 
         }
