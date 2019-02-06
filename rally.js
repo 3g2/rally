@@ -19,8 +19,13 @@ function computerMovement() {
 		}
     }
 
-    
-function moveEverything () {
+    function ballReset() {
+        ballX = canvas.width/2;
+        ballY = canvas.height/2;
+        ballSpeedX = -3;
+    } 
+
+    function moveEverything () {
     computerMovement();
     
     ballX = ballX + ballSpeedX;
