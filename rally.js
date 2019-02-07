@@ -17,7 +17,7 @@ const WINNING_SCORE = 7;
 
 var showingWinScreen = false;
 
-const PADDLE_HEIGHT = 100;
+const PADDLE_HEIGHT = 75;
 const PADDLE_THICKNESS = 10;
 
 function calculateMousePos (evt) {
@@ -62,9 +62,9 @@ function computerMovement() {
 	
 	var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
 	if(paddle2YCenter < ballY - 35) {
-		paddle2Y += 6;
+		paddle2Y += 8;
 	} else if (paddle2YCenter > ballY + 35){
-			paddle2Y -= 6;
+			paddle2Y -= 8;
 		}
     }
 
