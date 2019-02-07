@@ -15,6 +15,8 @@ var playerOneScore = 0;
 var playerTwoScore = 0;
 const WINNING_SCORE = 7;
 
+var showingWinScreen = false;
+
 const PADDLE_HEIGHT = 100;
 const PADDLE_THICKNESS = 10;
 
@@ -29,6 +31,14 @@ function calculateMousePos (evt) {
 	};
 }
 
+function endGameMouseClick (evt) {
+    if (showingWinScreen) {
+        playerOneScore = 0;
+        playerTwoScore = 0;
+        showingWinScreen = false;
+    }
+}
+
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
@@ -37,7 +47,9 @@ window.onload = function() {
 		setInterval(function() {
 			drawEverything();
 			moveEverything();
-		}, 1000/fps);
+        }, 1000/fps);
+        
+        canvas.addEventListener('mousedown',endGameMouseClick);
 
 		canvas.addEventListener('mousemove',
 			function (evt) {
@@ -59,8 +71,7 @@ function computerMovement() {
 function ballReset(player) {
     if (playerOneScore >= WINNING_SCORE || 
         playerTwoScore >= WINNING_SCORE) {
-            playerOneScore = 0;
-            playerTwoScore = 0;
+            showingWinScreen = true;
         }
     ballX = canvas.width/2;
     ballY = canvas.height/2;
@@ -76,6 +87,10 @@ function ballReset(player) {
 
 function moveEverything () {
     computerMovement();
+
+    if (showingWinScreen){
+        return;
+    }
 
     ballX = ballX + ballSpeedX;
     ballY = ballY + ballSpeedY;

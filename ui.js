@@ -1,6 +1,13 @@
 function drawEverything () {
 
-	colorRect(0, 0, canvas.width, canvas.height, 'black');
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    
+    if(showingWinScreen){
+        canvasContext.fillStyle = 'white';
+        canvasContext.fillText("Game Over. Click to Continue.", 100, 100);
+        return;
+    }
+
 	colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	
