@@ -2,4 +2,16 @@
         padding: 50px;
         margin: auto;
         display: block;
+        padding: 0;
     }
+
+#gameTitle {
+    height: 20%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
+    
+

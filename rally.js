@@ -13,11 +13,11 @@ var paddle2Y = 250;
 
 var playerOneScore = 0;
 var playerTwoScore = 0;
-const WINNING_SCORE = 1;
+const WINNING_SCORE = 2;
 
 var showingWinScreen = false;
 
-const PADDLE_HEIGHT = 75;
+const PADDLE_HEIGHT = 85;
 const PADDLE_THICKNESS = 10;
 
 
@@ -63,19 +63,18 @@ function computerMovement() {
 
     var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
     if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 8;
+        paddle2Y += 7;
     } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 8;
+        paddle2Y -= 7;
     }
 }
 
 function ballReset(player) {
-    if (playerOneScore === WINNING_SCORE) { 
-        alert('Player 1 wins!!!');
+    if (playerOneScore >= WINNING_SCORE || 
+        playerTwoScore >= WINNING_SCORE) {
+            showingWinScreen = true;
     }
-    if (playerTwoScore === WINNING_SCORE) {
-        alert('Player 2 wins!!!!');
-    }
+
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     ballSpeedY = 0;
@@ -105,27 +104,25 @@ function moveEverything() {
             ballSpeedY = deltaY * 0.35;
         }
         else {
-            ballReset(PLAYER_TWO); //Must be BEFORE ballReset();
-            ++playerTwoScore;
-            console.log('updating player2 score to', playerTwoScore);
+            playerTwoScore++;
+            ballReset(PLAYER_TWO);
         }
     }
-    if (ballX > 860) {
+    if (ballX > 1160) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
         }
         else {
+            playerOneScore++;
             ballReset();
-            ++playerOneScore; //Must be BEFORE ballReset();
-            console.log('updating player1 score to', playerOneScore);
         }
     }
 
-    if (ballY < 20) {
+    if (ballY < 40) {
         ballSpeedY = -ballSpeedY;
     }
 
-    if (ballY > 480) {
+    if (ballY > 460) {
         ballSpeedY = -ballSpeedY;
     }
 

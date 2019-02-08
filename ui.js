@@ -2,20 +2,18 @@ function drawEverything () {
 
     colorRect(0, 0, canvas.width, canvas.height, 'black');
 
-    
     if(showingWinScreen){
         canvasContext.fillStyle = 'white';
         canvasContext.textAlign = 'center';
-        canvasContext.textBaseline = 'middle';  
-        canvasContext.fillText("Game Over. Click to Continue.", 450, 150);
+        canvasContext.textBaseline = 'middle';
+        canvasContext.font='30px Share Tech Mono, monospace';
+        if(playerOneScore >= WINNING_SCORE) {
+            canvasContext.fillText("Player one wins!", 600, 150);
+        } else if(playerTwoScore >= WINNING_SCORE) {
+            canvasContext.fillText("Player two wins!", 600, 150);
 
-        if (playerOneScore >= WINNING_SCORE) {
-            canvasContext.fillText("Player one has won!", canvas.width, canvas.height)
         }
-        else if (playerTwoScore >= WINNING_SCORE) {
-            canvasContext.fillText("Player two has won!", canvas.width, canvas.height)
-        }
-
+        canvasContext.fillText("Game Over. Click to Restart.", 600, 400);
     return;
     }
 
