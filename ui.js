@@ -5,13 +5,15 @@ function drawEverything () {
     
     if(showingWinScreen){
         canvasContext.fillStyle = 'white';
+        canvasContext.textAlign = 'center';
+        canvasContext.textBaseline = 'middle';  
         canvasContext.fillText("Game Over. Click to Continue.", 450, 150);
 
         if (playerOneScore >= WINNING_SCORE) {
-            canvasContext.fillText("Player one has won!")
+            canvasContext.fillText("Player one has won!", canvas.width, canvas.height)
         }
         else if (playerTwoScore >= WINNING_SCORE) {
-            canvasContext.fillText("Player two has won!", 450, 100)
+            canvasContext.fillText("Player two has won!", canvas.width, canvas.height)
         }
 
     return;

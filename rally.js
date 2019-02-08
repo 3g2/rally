@@ -13,25 +13,26 @@ var paddle2Y = 250;
 
 var playerOneScore = 0;
 var playerTwoScore = 0;
-const WINNING_SCORE = 7;
+const WINNING_SCORE = 1;
 
 var showingWinScreen = false;
 
 const PADDLE_HEIGHT = 75;
 const PADDLE_THICKNESS = 10;
 
-function calculateMousePos (evt) {
-	var rect = canvas.getBoundingClientRect();
-	var root = document.documentElement;
-	mouseX = evt.clientX - rect.left - root.scrollLeft;
-	mouseY = evt.clientY - rect.top - root.scrollTop;
-	return {
-			x:mouseX,
-			y:mouseY
-	};
+
+function calculateMousePos(evt) {
+    var rect = canvas.getBoundingClientRect();
+    var root = document.documentElement;
+    mouseX = evt.clientX - rect.left - root.scrollLeft;
+    mouseY = evt.clientY - rect.top - root.scrollTop;
+    return {
+        x: mouseX,
+        y: mouseY
+    };
 }
 
-function endGameMouseClick (evt) {
+function endGameMouseClick(evt) {
     if (showingWinScreen) {
         playerOneScore = 0;
         playerTwoScore = 0;
@@ -39,42 +40,44 @@ function endGameMouseClick (evt) {
     }
 }
 
-window.onload = function() {
-	canvas = document.getElementById('gameCanvas');
-	canvasContext = canvas.getContext('2d');
-	
-	var fps = 60;
-		setInterval(function() {
-			drawEverything();
-			moveEverything();
-        }, 1000/fps);
-        
-        canvas.addEventListener('mousedown',endGameMouseClick);
+window.onload = function () {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
 
-		canvas.addEventListener('mousemove',
-			function (evt) {
-				var mousePos = calculateMousePos(evt);
-				paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
-			});
+    var fps = 60;
+    setInterval(function () {
+        drawEverything();
+        moveEverything();
+    }, 1000 / fps);
+
+    canvas.addEventListener('mousedown', endGameMouseClick);
+
+    canvas.addEventListener('mousemove',
+        function (evt) {
+            var mousePos = calculateMousePos(evt);
+            paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
+        });
 }
 
 function computerMovement() {
-	
-	var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
-	if(paddle2YCenter < ballY - 35) {
-		paddle2Y += 8;
-	} else if (paddle2YCenter > ballY + 35){
-			paddle2Y -= 8;
-		}
+
+    var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
+    if (paddle2YCenter < ballY - 35) {
+        paddle2Y += 8;
+    } else if (paddle2YCenter > ballY + 35) {
+        paddle2Y -= 8;
     }
+}
 
 function ballReset(player) {
-    if (playerOneScore >= WINNING_SCORE || 
-        playerTwoScore >= WINNING_SCORE) {
-            showingWinScreen = true;
-        }
-    ballX = canvas.width/2;
-    ballY = canvas.height/2;
+    if (playerOneScore === WINNING_SCORE) { 
+        alert('Player 1 wins!!!');
+    }
+    if (playerTwoScore === WINNING_SCORE) {
+        alert('Player 2 wins!!!!');
+    }
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
     ballSpeedY = 0;
 
     if (player === PLAYER_ONE) {
@@ -83,12 +86,12 @@ function ballReset(player) {
     else {
         ballspeedX = -10;
     }
-} 
+}
 
-function moveEverything () {
+function moveEverything() {
     computerMovement();
 
-    if (showingWinScreen){
+    if (showingWinScreen) {
         return;
     }
 
@@ -96,32 +99,34 @@ function moveEverything () {
     ballY = ballY + ballSpeedY;
 
     if (ballX < 40) {
-    if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT) {
-        ballSpeedX = -ballSpeedX;
-        var deltaY = ballY - (paddle1Y+PADDLE_HEIGHT/2);
-        ballSpeedY = deltaY * 0.35;
+        if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
+            var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
+            ballSpeedY = deltaY * 0.35;
         }
         else {
             ballReset(PLAYER_TWO); //Must be BEFORE ballReset();
-            playerTwoScore++;
-        } 
+            ++playerTwoScore;
+            console.log('updating player2 score to', playerTwoScore);
+        }
     }
     if (ballX > 860) {
-    if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT) {
-        ballSpeedX = -ballSpeedX;
+        if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
         }
-    else {
-        ballReset();
-        playerOneScore++; //Must be BEFORE ballReset();
-        } 
+        else {
+            ballReset();
+            ++playerOneScore; //Must be BEFORE ballReset();
+            console.log('updating player1 score to', playerOneScore);
+        }
     }
 
     if (ballY < 20) {
-    ballSpeedY = -ballSpeedY;
+        ballSpeedY = -ballSpeedY;
     }
 
     if (ballY > 480) {
-    ballSpeedY = -ballSpeedY;
+        ballSpeedY = -ballSpeedY;
     }
 
 
