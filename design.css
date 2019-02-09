@@ -1,15 +1,16 @@
 #gameCanvas {
-        padding: 50px;
-        margin: auto;
-        display: block;
-        padding: 0;
-    }
+    padding: 50px;
+    margin: auto;
+    display: block;
+    padding: 0;
+}
 
 #gameTitle {
     height: 20%;
     margin: 0;
     padding: 0;
     text-align: center;
+    font-family:'Share Tech Mono', monospace;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);

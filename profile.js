@@ -16,16 +16,17 @@ function drawEverything () {
         canvasContext.fillText("Game Over. Click to Restart.", 600, 400);
     return;
     }
-
+ 
     drawNet();
     
 	colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	
-	colorCircle(ballX, ballY, 15, 'blue'); 
+	colorCircle(ballX, ballY, 15, 'white'); 
 
-	canvasContext.fillText(playerOneScore, 100, 100);
-	canvasContext.fillText(playerTwoScore, canvas.width-100, 100);
+    canvasContext.font='50px Share Tech Mono, monospace';
+	canvasContext.fillText(playerOneScore, 200, 100);
+	canvasContext.fillText(playerTwoScore, canvas.width-200, 100);
 
 }
 
