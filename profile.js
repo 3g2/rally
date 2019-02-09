@@ -49,3 +49,10 @@ function drawNet() {
     }
 
 }
+
+function font (text) {
+    canvasContext.fillStyle = 'white';
+    canvasContext.textAlign = 'center';
+    canvasContext.textBaseline = 'middle';
+    canvasContext.font='30px Share Tech Mono, monospace';
+}

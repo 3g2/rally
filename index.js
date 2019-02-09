@@ -26,6 +26,13 @@ window.onload = function () {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     colorRect(0, 0, canvas.width, canvas.height, 'black');
+    canvasContext.fillStyle = 'white';
+    canvasContext.textAlign = 'center';
+    canvasContext.textBaseline = 'middle';
+    canvasContext.font='30px Share Tech Mono, monospace';
+    canvasContext.fillText("Move mouse to start", 600, 300);
+    canvasContext.font='50px Share Tech Mono, monospace';
+    canvasContext.fillText("Rally", 600, 150);
 
     canvas.addEventListener('mousemove', function() {
         if (gameStarted === false) {
@@ -122,9 +129,9 @@ function calculateMousePos(evt) {
 function computerMovement() {
     var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
     if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 7;
+        paddle2Y += 10;
     } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 7;
+        paddle2Y -= 10;
     }
 }
 
