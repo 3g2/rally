@@ -22,6 +22,10 @@ let gameStarted = false;
 const PADDLE_HEIGHT = 85;
 const PADDLE_THICKNESS = 10;
 
+var numHits = 0;
+var prevNumHits = numHits;
+const BALLSPEED_INCREASE = 1.01;
+
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
@@ -87,19 +91,35 @@ function moveEverything() {
             ballSpeedX = -ballSpeedX;
             var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
+            numHits += 1;
+            if (numHits > prevNumHits) {
+                ballSpeedX = ballSpeedX;
+                ballSpeedY = ballSpeedY;
+                prevNumHits = numHits;
+            }
         }
         else if (ballX < -20) {
             playerTwoScore++;
             ballReset();
+            numHits = 0;
+            prevNumHits = 0;
         }
     }
     if (ballX > 1180) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
+            numHits += 1;
+            if (numHits > prevNumHits) {
+                ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
+                ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
+                prevNumHits = numHits;
+            }
         }
         else if (ballX > 1250) {
             playerOneScore++;
             ballReset();
+            numHits = 0;
+            prevNumHits = 0;
         }
     }
 
