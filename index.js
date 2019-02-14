@@ -24,7 +24,7 @@ const PADDLE_THICKNESS = 10;
 
 var numHits = 0;
 var prevNumHits = numHits;
-const BALLSPEED_INCREASE = 1.01;
+const BALLSPEED_INCREASE = 1.5;
 
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
@@ -63,9 +63,12 @@ function ballReset(player) {
             showingWinScreen = true;
     }
 
+    
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     ballSpeedY = 0;
+    numHits = 0;
+    prevNumHits = 0;
 
     if (player === PLAYER_ONE) {
         ballSpeedX = 10;
@@ -91,45 +94,103 @@ function moveEverything() {
             ballSpeedX = -ballSpeedX;
             var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
-            numHits += 1;
-            if (numHits > prevNumHits) {
-                ballSpeedX = ballSpeedX;
-                ballSpeedY = ballSpeedY;
-                prevNumHits = numHits;
+            numHits++;
+            
+            var paddleHitSound = document.getElementById('paddleHit');
+            var paddleHitSoundStatus = true;
+
+            if (paddleHitSoundStatus) {
+                paddleHitSound.pause;
+                paddleHitSound.currentTime = 0;
+                paddleHitSound.play();
+                paddleHitSound.false;
+            }
+            if (numHits > 0) {
+                ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
+                ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
+            }
+            }
+            else if (ballX < -20) {
+                playerTwoScore++;
+                numHits = 0;
+                ballReset();
+
+                var missBallSound = document.getElementById('missBall');
+                var missBallSoundStatus = true;
+    
+                if (missBallSoundStatus)
+                {
+                    missBallSound.pause;
+                    missBallSound.currentTime = 0;
+                    missBallSound.play();
+                    missBallSound.false;
+                }
             }
         }
-        else if (ballX < -20) {
-            playerTwoScore++;
-            ballReset();
-            numHits = 0;
-            prevNumHits = 0;
-        }
-    }
     if (ballX > 1180) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
-            numHits += 1;
-            if (numHits > prevNumHits) {
-                ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
-                ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
-                prevNumHits = numHits;
+            numHits++;
+
+            var paddleHitSound = document.getElementById('paddleHit');
+            var paddleHitSoundStatus = true;
+
+            if (paddleHitSoundStatus) {
+                paddleHitSound.pause;
+                paddleHitSound.currentTime = 0;
+                paddleHitSound.play();
+                paddleHitSound.false;
             }
+
+                if (numHits > 0) {
+                    ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
+                    ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
+                }
         }
         else if (ballX > 1250) {
             playerOneScore++;
-            ballReset();
             numHits = 0;
-            prevNumHits = 0;
+            ballReset();
+
+            var missBallSound = document.getElementById('missBall');
+            var missBallSoundStatus = true;
+
+            if (missBallSoundStatus) {
+                missBallSound.pause;
+                missBallSound.currentTime = 0;
+                missBallSound.play();
+                missBallSound.false;
+        }
         }
     }
 
     //Y-AXIS Borders 
     if (ballY < 40) {
         ballSpeedY = -ballSpeedY;
+
+        var wallHitSound = document.getElementById('wallHit');
+        var wallHitStatus = true;
+
+        if (wallHitStatus) {
+            wallHitSound.pause;
+            wallHitSound.currentTime = 0;
+            wallHitSound.play();
+            wallHitSound.false;
+        }
     }
 
     if (ballY > 460) {
         ballSpeedY = -ballSpeedY;
+
+        var wallHitSound = document.getElementById('wallHit');
+        var wallHitStatus = true;
+
+        if (wallHitStatus) {
+            wallHitSound.pause;
+            wallHitSound.currentTime = 0;
+            wallHitSound.play();
+            wallHitSound.false;
+        }
     }
 
 
@@ -149,9 +210,9 @@ function calculateMousePos(evt) {
 function computerMovement() {
     var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
     if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 10;
+        paddle2Y += 20;
     } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 10;
+        paddle2Y -= 20;
     }
 }
 

@@ -22,7 +22,7 @@ function drawEverything () {
 	colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 	
-	colorCircle(ballX, ballY, 15, 'white'); 
+	colorCircle(ballX, ballY, 10, 'white'); 
 
     canvasContext.font='50px Share Tech Mono, monospace';
 	canvasContext.fillText(playerOneScore, 200, 100);
