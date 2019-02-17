@@ -74,7 +74,7 @@ function ballReset(player) {
         ballSpeedX = 10;
     }
     else {
-        ballspeedX = -10;
+        ballSpeedX = -10;
     }
 }
 
