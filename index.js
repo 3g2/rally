@@ -24,19 +24,12 @@ const PADDLE_THICKNESS = 10;
 
 var numHits = 0;
 var prevNumHits = numHits;
-const BALLSPEED_INCREASE = 1.5;
+const BALLSPEED_INCREASE = 1.03;
 
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
-    canvasContext.fillStyle = 'white';
-    canvasContext.textAlign = 'center';
-    canvasContext.textBaseline = 'middle';
-    canvasContext.font='30px Share Tech Mono, monospace';
-    canvasContext.fillText("Move mouse to start", 600, 300);
-    canvasContext.font='50px Share Tech Mono, monospace';
-    canvasContext.fillText("Rally", 600, 150);
+    gameStartTitle();
 
     canvas.addEventListener('mousemove', function() {
         if (gameStarted === false) {
@@ -96,35 +89,19 @@ function moveEverything() {
             ballSpeedY = deltaY * 0.35;
             numHits++;
             
-            var paddleHitSound = document.getElementById('paddleHit');
-            var paddleHitSoundStatus = true;
+            makePaddleNoise();
 
-            if (paddleHitSoundStatus) {
-                paddleHitSound.pause;
-                paddleHitSound.currentTime = 0;
-                paddleHitSound.play();
-                paddleHitSound.false;
-            }
             if (numHits > 0) {
                 ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
                 ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
             }
-            }
-            else if (ballX < -20) {
-                playerTwoScore++;
-                numHits = 0;
-                ballReset();
-
-                var missBallSound = document.getElementById('missBall');
-                var missBallSoundStatus = true;
-    
-                if (missBallSoundStatus)
-                {
-                    missBallSound.pause;
-                    missBallSound.currentTime = 0;
-                    missBallSound.play();
-                    missBallSound.false;
-                }
+        } else if (ballX < -20) {
+            playerTwoScore++;
+            numHits = 0;
+            ballReset();
+            
+            makeMissBallNoise();
+            
             }
         }
     if (ballX > 1180) {
@@ -132,15 +109,7 @@ function moveEverything() {
             ballSpeedX = -ballSpeedX;
             numHits++;
 
-            var paddleHitSound = document.getElementById('paddleHit');
-            var paddleHitSoundStatus = true;
-
-            if (paddleHitSoundStatus) {
-                paddleHitSound.pause;
-                paddleHitSound.currentTime = 0;
-                paddleHitSound.play();
-                paddleHitSound.false;
-            }
+            makePaddleNoise();
 
                 if (numHits > 0) {
                     ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
@@ -152,15 +121,7 @@ function moveEverything() {
             numHits = 0;
             ballReset();
 
-            var missBallSound = document.getElementById('missBall');
-            var missBallSoundStatus = true;
-
-            if (missBallSoundStatus) {
-                missBallSound.pause;
-                missBallSound.currentTime = 0;
-                missBallSound.play();
-                missBallSound.false;
-        }
+            makeMissBallNoise();
         }
     }
 
@@ -168,29 +129,13 @@ function moveEverything() {
     if (ballY < 40) {
         ballSpeedY = -ballSpeedY;
 
-        var wallHitSound = document.getElementById('wallHit');
-        var wallHitStatus = true;
-
-        if (wallHitStatus) {
-            wallHitSound.pause;
-            wallHitSound.currentTime = 0;
-            wallHitSound.play();
-            wallHitSound.false;
-        }
+        makeWallHitNoise();
     }
 
     if (ballY > 460) {
         ballSpeedY = -ballSpeedY;
 
-        var wallHitSound = document.getElementById('wallHit');
-        var wallHitStatus = true;
-
-        if (wallHitStatus) {
-            wallHitSound.pause;
-            wallHitSound.currentTime = 0;
-            wallHitSound.play();
-            wallHitSound.false;
-        }
+        makeWallHitNoise();
     }
 
 
@@ -210,9 +155,9 @@ function calculateMousePos(evt) {
 function computerMovement() {
     var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
     if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 20;
+        paddle2Y += 8;
     } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 20;
+        paddle2Y -= 8;
     }
 }
 
@@ -222,4 +167,54 @@ function endGameMouseClick(evt) {
         playerTwoScore = 0;
         showingWinScreen = false;
     }
+}
+
+function gameStartTitle() {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    canvasContext.fillStyle = 'white';
+    canvasContext.textAlign = 'center';
+    canvasContext.textBaseline = 'middle';
+    canvasContext.font='30px Share Tech Mono, monospace';
+    canvasContext.fillText("Move mouse to start", 600, 300);
+    canvasContext.font='50px Share Tech Mono, monospace';
+    canvasContext.fillText("Rally", 600, 150);
+}
+
+function makePaddleNoise() {
+    var paddleHitSound = document.getElementById('paddleHit');
+    var paddleHitSoundStatus = true;
+
+    if (paddleHitSoundStatus) {
+        paddleHitSound.pause;
+        paddleHitSound.currentTime = 0;
+        paddleHitSound.play();
+        paddleHitSound.false;
+    }
+}
+
+function makeMissBallNoise() {
+    var missBallSound = document.getElementById('missBall');
+    var missBallSoundStatus = true;
+
+    if (missBallSoundStatus)
+    {
+        missBallSound.pause;
+        missBallSound.currentTime = 0;
+        missBallSound.play();
+        missBallSound.false;
+    }
+}
+
+function makeWallHitNoise() {
+    var wallHitSound = document.getElementById('wallHit');
+        var wallHitStatus = true;
+
+        if (wallHitStatus) {
+            wallHitSound.pause;
+            wallHitSound.currentTime = 0;
+            wallHitSound.play();
+            wallHitSound.false;
+        }
 }
