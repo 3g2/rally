@@ -63,10 +63,10 @@ function ballReset(player) {
     numHits = 0;
     prevNumHits = 0;
 
-    if (playerOneScore) {
+    if (player === PLAYER_ONE) {
         ballSpeedX = 10;
     }
-    else if (playerTwoScore){
+    else {
         ballSpeedX = -10;
     }
 }
@@ -98,7 +98,7 @@ function moveEverything() {
         } else if (ballX < -20) {
             playerTwoScore++;
             numHits = 0;
-            ballReset();
+            ballReset(PLAYER_TWO);
             
             makeMissBallNoise();
             
@@ -119,7 +119,7 @@ function moveEverything() {
         else if (ballX > 1250) {
             playerOneScore++;
             numHits = 0;
-            ballReset();
+            ballReset(PLAYER_ONE);
 
             makeMissBallNoise();
         }
