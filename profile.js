@@ -3,10 +3,7 @@ function drawEverything () {
     colorRect(0, 0, canvas.width, canvas.height, 'black');
 
     if(showingWinScreen){
-        canvasContext.fillStyle = 'white';
-        canvasContext.textAlign = 'center';
-        canvasContext.textBaseline = 'middle';
-        canvasContext.font='30px Share Tech Mono, monospace';
+        drawWinScreenText();
         if(playerOneScore >= WINNING_SCORE) {
             canvasContext.fillText("Player one wins!", 600, 150);
         } else if(playerTwoScore >= WINNING_SCORE) {
@@ -18,15 +15,9 @@ function drawEverything () {
     }
  
     drawNet();
-    
-	colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
-	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
-	
-	colorCircle(ballX, ballY, 10, 'white'); 
-
-    canvasContext.font='50px Share Tech Mono, monospace';
-	canvasContext.fillText(playerOneScore, 200, 100);
-	canvasContext.fillText(playerTwoScore, canvas.width-200, 100);
+    drawPaddle();
+    drawBall();
+    drawScoreBoard();
 
 }
 
@@ -50,9 +41,24 @@ function drawNet() {
 
 }
 
-function font (text) {
+function drawWinScreenText() {
     canvasContext.fillStyle = 'white';
     canvasContext.textAlign = 'center';
     canvasContext.textBaseline = 'middle';
     canvasContext.font='30px Share Tech Mono, monospace';
+}
+
+function drawBall(){
+    colorCircle(ballX, ballY, 10, 'white'); 
+}
+
+function drawPaddle() {
+    colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+}
+
+function drawScoreBoard() {
+    canvasContext.font='50px Share Tech Mono, monospace';
+	canvasContext.fillText(playerOneScore, 200, 100);
+	canvasContext.fillText(playerTwoScore, canvas.width-200, 100);
 }

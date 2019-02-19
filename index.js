@@ -1,30 +1,30 @@
+
+var canvas;
+var canvasContext;
+var showingWinScreen = false;
+let gameStarted = false;
+
 const PLAYER_ONE = 1;
 const PLAYER_TWO = 2;
+const WINNING_SCORE = 2;
+var playerOneScore = 0;
+var playerTwoScore = 0;
 
 var ballX = 50;
 var ballY = 50;
 var ballSpeedX = 10;
 var ballSpeedY = 10;
-
-var canvas;
-var canvasContext;
-
-var paddle1Y = 250;
-var paddle2Y = 250;
-
-var playerOneScore = 0;
-var playerTwoScore = 0;
-const WINNING_SCORE = 2;
-
-var showingWinScreen = false;
-let gameStarted = false;
-
-const PADDLE_HEIGHT = 85;
-const PADDLE_THICKNESS = 10;
+var ballServeSpeed = 10;
+const BALLSPEED_INCREASE = 1.4;
 
 var numHits = 0;
 var prevNumHits = numHits;
-const BALLSPEED_INCREASE = 1.03;
+
+var paddle1Y = 250;
+var paddle2Y = 250;
+const PADDLE_HEIGHT = 85;
+const PADDLE_THICKNESS = 10;
+
 
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
@@ -64,10 +64,10 @@ function ballReset(player) {
     prevNumHits = 0;
 
     if (player === PLAYER_ONE) {
-        ballSpeedX = 10;
+        ballSpeedX = ballServeSpeed;
     }
     else {
-        ballSpeedX = -10;
+        ballSpeedX = -ballServeSpeed;
     }
 }
 
