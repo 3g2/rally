@@ -7,7 +7,7 @@ let isPaused = false;
 
 const PLAYER_ONE = 1;
 const PLAYER_TWO = 2;
-const WINNING_SCORE = 7;
+const WINNING_SCORE = 1;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 
@@ -30,8 +30,7 @@ window.onload = function () {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     gameStartTitle();
-
-    canvas.addEventListener('mousemove', function() {
+    canvas.addEventListener('click', function() {
         if (gameStarted === false) {
             gameStarted = true;
             var fps = 60;
@@ -58,7 +57,6 @@ function ballReset(player) {
             showingWinScreen = true;
     }
 
-    
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     ballSpeedY = 3;
@@ -75,7 +73,6 @@ function ballReset(player) {
 
 function moveEverything() {
     computerMovement();
-
     if (showingWinScreen) {
         return;
     }
@@ -84,14 +81,12 @@ function moveEverything() {
     ballY = ballY + ballSpeedY;
 
     //X-AXIS Borders
-
     if (ballX < 20) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
             var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
             ballSpeedY = deltaY * 0.35;
             numHits++;
-            
             makePaddleNoise();
 
             if (numHits > 0) {
@@ -102,9 +97,7 @@ function moveEverything() {
             playerTwoScore++;
             numHits = 0;
             ballReset(PLAYER_TWO);
-            
             makeMissBallNoise();
-            
             }
         }
     if (ballX > 1180) {
@@ -127,22 +120,15 @@ function moveEverything() {
             makeMissBallNoise();
         }
     }
-
     //Y-AXIS Borders
-
-    if (ballY < 40) {
+    if (ballY < 15) {
         ballSpeedY = -ballSpeedY;
-
         makeWallHitNoise();
     }
-
-    if (ballY > 460) {
+    if (ballY > 485) {
         ballSpeedY = -ballSpeedY;
-
         makeWallHitNoise();
     }
-
-
 }
 
 function calculateMousePos(evt) {
@@ -180,9 +166,9 @@ function gameStartTitle() {
     canvasContext.fillStyle = 'white';
     canvasContext.textAlign = 'center';
     canvasContext.textBaseline = 'middle';
-    canvasContext.font='30px Share Tech Mono, monospace';
-    canvasContext.fillText("Move mouse to start", 600, 300);
-    canvasContext.font='50px Share Tech Mono, monospace';
+    canvasContext.font='30px Bungee Outline, cursive';
+    canvasContext.fillText("Click to start", 600, 400);
+    canvasContext.font='80px Bungee Outline, cursive';
     canvasContext.fillText("Rally", 600, 150);
 }
 

@@ -1,18 +1,28 @@
+html {
+    background: black;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+#motherboard {
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
 #gameCanvas {
-    padding: 50px;
+    padding-left: 3px;
+    padding-right: 3px;
     margin: auto;
     display: block;
-    padding: 0;
+    border-style: solid;
+    border-color: white;
+    border-width: 10px;
 }
-
-#gameTitle {
-    height: 20%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-family:'Share Tech Mono', monospace;
-}
-
+@import url('https://fonts.googleapis.com/css?family=Bungee+Outline');
 @import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
     
 

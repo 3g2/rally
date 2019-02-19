@@ -1,15 +1,15 @@
 function drawEverything () {
 
     colorRect(0, 0, canvas.width, canvas.height, 'black');
-
     if(showingWinScreen){
         drawWinScreenText();
         if(playerOneScore >= WINNING_SCORE) {
+            canvasContext.font='60px Bungee Outline, cursive';
             canvasContext.fillText("Player one wins!", 600, 150);
         } else if(playerTwoScore >= WINNING_SCORE) {
             canvasContext.fillText("Player two wins!", 600, 150);
-
         }
+        canvasContext.font='30px Bungee Outline, cursive';
         canvasContext.fillText("Game Over. Click to Restart.", 600, 400);
     return;
     }
@@ -28,15 +28,14 @@ function colorCircle(centerX, centerY, radius, drawColor) {
 	canvasContext.fill();
 }
 
-
 function colorRect(leftX, topY, width, height, drawColor) {
 	canvasContext.fillStyle = drawColor;
 	canvasContext.fillRect(leftX, topY, width, height);
 }
 
 function drawNet() {
-    for (i = 0; i < canvas.height; i += 35) {
-        colorRect(canvas.width/2-1,i,2,20,'white');
+    for (i = 0; i < canvas.height; i += 1) {
+        colorRect(canvas.width/2-1,i,5,20,'white');
     }
 
 }
@@ -45,7 +44,7 @@ function drawWinScreenText() {
     canvasContext.fillStyle = 'white';
     canvasContext.textAlign = 'center';
     canvasContext.textBaseline = 'middle';
-    canvasContext.font='30px Share Tech Mono, monospace';
+    canvasContext.font='30px Bungee Outline, cursive';
 }
 
 function drawBall(){
@@ -58,14 +57,14 @@ function drawPaddle() {
 }
 
 function drawScoreBoard() {
-    canvasContext.font='50px Share Tech Mono, monospace';
-	canvasContext.fillText(playerOneScore, 200, 100);
-	canvasContext.fillText(playerTwoScore, canvas.width-200, 100);
+	canvasContext.fillText(playerOneScore, 300, 100);
+    canvasContext.fillText(playerTwoScore, canvas.width-300, 100);
+    canvasContext.font='10px Bungee Outline, cursive';
 }
 
 function rally() {
-    if (numHits >= 1) {
-    canvasContext.fillText("Rally: " + numHits, 600, 450);
-    canvasContext.font='30px Share Tech Mono, monospace';
+    if (numHits >= 0) {
+        canvasContext.font='40px Bungee Outline, cursive';
+        canvasContext.fillText("Rally:" + numHits, 400, 450);
     }
 }
