@@ -59,14 +59,14 @@ function ballReset(player) {
     
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
-    ballSpeedY = 0;
+    ballSpeedY = 3;
     numHits = 0;
     prevNumHits = 0;
 
-    if (player === PLAYER_ONE) {
+    if (playerOneScore) {
         ballSpeedX = 10;
     }
-    else {
+    else if (playerTwoScore){
         ballSpeedX = -10;
     }
 }
