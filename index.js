@@ -7,7 +7,7 @@ let isPaused = false;
 
 const PLAYER_ONE = 1;
 const PLAYER_TWO = 2;
-const WINNING_SCORE = 1;
+const WINNING_SCORE = 5;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 
@@ -167,8 +167,8 @@ function gameStartTitle() {
     canvasContext.textAlign = 'center';
     canvasContext.textBaseline = 'middle';
     canvasContext.font='30px Bungee Outline, cursive';
-    canvasContext.fillText("Click to start", 600, 400);
-    canvasContext.font='80px Bungee Outline, cursive';
+    canvasContext.fillText("Click to start", 600, 300);
+    canvasContext.font='100px Bungee Outline, cursive';
     canvasContext.fillText("Rally", 600, 150);
 }
 
@@ -211,11 +211,21 @@ function makeWallHitNoise() {
 
 window.addEventListener("keydown", gamePause); 
 
+function gamePauseDisplay() {
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    canvasContext.fillStyle = 'white';
+    canvasContext.textAlign = 'center';
+    canvasContext.textBaseline = 'middle';
+    canvasContext.font='100px Bungee Outline, cursive';
+    canvasContext.fillText("Paused", 600, 250);
+}
+
 //OR isPaused = !isPaused
 function gamePause(evt) {
     if (evt.keyCode === 80) {
         if (!isPaused) {
             isPaused = true;
+            gamePauseDisplay();
         }
         else {
             isPaused = false;
