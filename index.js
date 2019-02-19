@@ -3,19 +3,20 @@ var canvas;
 var canvasContext;
 var showingWinScreen = false;
 let gameStarted = false;
+let isPaused = false;
 
 const PLAYER_ONE = 1;
 const PLAYER_TWO = 2;
-const WINNING_SCORE = 2;
+const WINNING_SCORE = 7;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 
 var ballX = 50;
 var ballY = 50;
-var ballSpeedX = 10;
-var ballSpeedY = 10;
-var ballServeSpeed = 10;
-const BALLSPEED_INCREASE = 1.4;
+var ballSpeedX = 8;
+var ballSpeedY = 8;
+var ballServeSpeed = 8;
+const BALLSPEED_INCREASE = 1.04;
 
 var numHits = 0;
 var prevNumHits = numHits;
@@ -24,7 +25,6 @@ var paddle1Y = 250;
 var paddle2Y = 250;
 const PADDLE_HEIGHT = 85;
 const PADDLE_THICKNESS = 10;
-
 
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
@@ -36,8 +36,10 @@ window.onload = function () {
             gameStarted = true;
             var fps = 60;
             setInterval(function () {
-                drawEverything();
-                moveEverything();
+                if (!isPaused) {
+                    drawEverything();
+                    moveEverything();
+                }
             }, 1000 / fps);
         }
     });
@@ -82,6 +84,7 @@ function moveEverything() {
     ballY = ballY + ballSpeedY;
 
     //X-AXIS Borders
+
     if (ballX < 20) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
@@ -125,7 +128,8 @@ function moveEverything() {
         }
     }
 
-    //Y-AXIS Borders 
+    //Y-AXIS Borders
+
     if (ballY < 40) {
         ballSpeedY = -ballSpeedY;
 
@@ -217,4 +221,18 @@ function makeWallHitNoise() {
             wallHitSound.play();
             wallHitSound.false;
         }
+}
+
+window.addEventListener("keydown", gamePause); 
+
+//OR isPaused = !isPaused
+function gamePause(evt) {
+    if (evt.keyCode === 80) {
+        if (!isPaused) {
+            isPaused = true;
+        }
+        else {
+            isPaused = false;
+        }
+    }
 }

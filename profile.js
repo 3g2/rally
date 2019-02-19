@@ -13,8 +13,8 @@ function drawEverything () {
         canvasContext.fillText("Game Over. Click to Restart.", 600, 400);
     return;
     }
- 
     drawNet();
+    rally();
     drawPaddle();
     drawBall();
     drawScoreBoard();
@@ -61,4 +61,11 @@ function drawScoreBoard() {
     canvasContext.font='50px Share Tech Mono, monospace';
 	canvasContext.fillText(playerOneScore, 200, 100);
 	canvasContext.fillText(playerTwoScore, canvas.width-200, 100);
+}
+
+function rally() {
+    if (numHits >= 1) {
+    canvasContext.fillText("Rally: " + numHits, 600, 450);
+    canvasContext.font='30px Share Tech Mono, monospace';
+    }
 }
