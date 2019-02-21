@@ -4,6 +4,7 @@ var canvasContext;
 var showingWinScreen = false;
 let gameStarted = false;
 let isPaused = false;
+let gameInterval;
 
 const PLAYER_ONE = 1;
 const PLAYER_TWO = 2;
@@ -27,24 +28,25 @@ var paddle2Y = 250;
 const PADDLE_HEIGHT = 85;
 const PADDLE_THICKNESS = 10;
 
-function gameInterval() {
-    if (!isPaused) {
-        drawEverything();
-        moveEverything();
-    }
-}
-
 window.onload = loadGame;
 
 function loadGame() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
+    playerOneScore = 0;
+    playerTwoScore = 0;
     gameStartTitle();
     canvas.addEventListener('click', function() {
         if (gameStarted === false) {
             gameStarted = true;
             var fps = 60;
-            setInterval(gameInterval, 1000 / fps);
+            gameInterval = setInterval(
+                function() {
+                    if (!isPaused) {
+                        drawEverything();
+                        moveEverything();
+                    }
+                }, 1000 / fps);
         }
     });
     
@@ -221,24 +223,25 @@ function gamePauseDisplay() {
     canvasContext.fillStyle = 'white';
     canvasContext.textAlign = 'center';
     canvasContext.textBaseline = 'middle';
-    canvasContext.font='100px Bungee Outline, cursive';
-    canvasContext.fillText("Paused", 600, 250);
+    canvasContext.font='115px Bungee Outline, cursive';
+    canvasContext.fillText("Paused", 600, 100);
 }
 
 //OR isPaused = !isPaused
 function gamePause(evt) {
     if (evt.keyCode === 80) {
-        
         const mainMenuButton = document.getElementById('mainMenu');
-
         mainMenuButton.addEventListener('click', function(){
-
+            gameStarted = false;
+            isPaused = false;
+            clearInterval(gameInterval);
+            mainMenuButton.style.visibility = 'hidden';
+            loadGame();
         })
-        
+
         if (!isPaused) {
             isPaused = true;
             gamePauseDisplay();
-
             mainMenuButton.style.visibility = 'visible';
         }
         else {

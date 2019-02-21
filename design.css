@@ -25,11 +25,22 @@ html, body {
 
 #mainMenu {
     position: absolute;
-    top: 0;
+    top: 65%;
     left: 50%;
     transform: translateX(-50%);
     visibility: hidden;
+    border-color: white;
+    border-style: solid;
+    border-width: 7px;
+    font-size: 50px;
+    font-family: "Bungee Outline", cursive;
+    color: white;
+    background-color: transparent;
+    padding: 10px; 
+    cursor: pointer;
+
 }
+
 @import url('https://fonts.googleapis.com/css?family=Bungee+Outline');
 @import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
     
