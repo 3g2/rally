@@ -236,6 +236,7 @@ function gamePause(evt) {
             isPaused = false;
             clearInterval(gameInterval);
             mainMenuButton.style.visibility = 'hidden';
+            ballReset();
             loadGame();
         })
 
