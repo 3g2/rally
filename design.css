@@ -22,6 +22,14 @@ html, body {
     border-color: white;
     border-width: 10px;
 }
+
+#mainMenu {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+}
 @import url('https://fonts.googleapis.com/css?family=Bungee+Outline');
 @import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
     

@@ -20,13 +20,23 @@ const BALLSPEED_INCREASE = 1.04;
 
 var numHits = 0;
 var prevNumHits = numHits;
+var savedRally = localStorage.getItem("highScore") || 0;
 
 var paddle1Y = 250;
 var paddle2Y = 250;
 const PADDLE_HEIGHT = 85;
 const PADDLE_THICKNESS = 10;
 
-window.onload = function () {
+function gameInterval() {
+    if (!isPaused) {
+        drawEverything();
+        moveEverything();
+    }
+}
+
+window.onload = loadGame;
+
+function loadGame() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     gameStartTitle();
@@ -34,12 +44,7 @@ window.onload = function () {
         if (gameStarted === false) {
             gameStarted = true;
             var fps = 60;
-            setInterval(function () {
-                if (!isPaused) {
-                    drawEverything();
-                    moveEverything();
-                }
-            }, 1000 / fps);
+            setInterval(gameInterval, 1000 / fps);
         }
     });
     
@@ -223,12 +228,22 @@ function gamePauseDisplay() {
 //OR isPaused = !isPaused
 function gamePause(evt) {
     if (evt.keyCode === 80) {
+        
+        const mainMenuButton = document.getElementById('mainMenu');
+
+        mainMenuButton.addEventListener('click', function(){
+
+        })
+        
         if (!isPaused) {
             isPaused = true;
             gamePauseDisplay();
+
+            mainMenuButton.style.visibility = 'visible';
         }
         else {
             isPaused = false;
+            mainMenuButton.style.visibility = 'hidden';
         }
     }
 }

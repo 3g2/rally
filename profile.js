@@ -18,6 +18,7 @@ function drawEverything () {
     drawNet();
     rally();
     drawPaddle();
+    highRally();
     drawBall();
     drawScoreBoard();
 
@@ -72,4 +73,14 @@ function rally() {
 
 function winningTitle() {
     canvasContext.font='60px Bungee Outline, cursive';
+}
+
+function highRally () {
+    canvasContext.font='20px Bungee Outline, cursive';
+    canvasContext.fillText("High Score:" + savedRally, 400, 420);
+    if (numHits > savedRally) {
+        localStorage.setItem("highScore", numHits);
+        savedRally++;
+
+    }
 }
