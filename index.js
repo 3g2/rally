@@ -16,6 +16,7 @@ var ballX = 50;
 var ballY = 50;
 var ballSpeedX = 8;
 var ballSpeedY = 8;
+var originalBallSpeedY = 8;
 var ballServeSpeed = 8;
 const BALLSPEED_INCREASE = 1.04;
 
@@ -23,9 +24,11 @@ var numHits = 0;
 var prevNumHits = numHits;
 var savedRally = localStorage.getItem("highScore") || 0;
 
+//paddle1&2Y are variables that is a starting point for where the paddles will be
 var paddle1Y = 250;
+var paddle1YCenter;
 var paddle2Y = 250;
-const PADDLE_HEIGHT = 85;
+const PADDLE_HEIGHT = 90;
 const PADDLE_THICKNESS = 10;
 
 window.onload = loadGame;
@@ -55,6 +58,7 @@ function loadGame() {
         function (evt) {
             var mousePos = calculateMousePos(evt);
             paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
+            paddle1YCenter = paddle1Y;
         });
 }
 
@@ -83,22 +87,39 @@ function moveEverything() {
     if (showingWinScreen) {
         return;
     }
-
-    ballX = ballX + ballSpeedX;
-    ballY = ballY + ballSpeedY;
-
-    //X-AXIS Borders
+    
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+    
     if (ballX < 20) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+            if (ballY < paddle1YCenter - 26 && ballY > paddle1YCenter - 45) {
+                ballspeedY = (ballSpeedY * 2);
+                console.log(ballSpeedY);
+
+            }
+            else if (ballY < paddle1YCenter -  6 && ballY > paddle1YCenter - 25){
+                ballspeedY = (ballSpeedY * 2);
+                console.log(ballSpeedY);
+            }
+            else if (ballY > paddle1YCenter - 5 && ballY < paddle1YCenter + 5){
+                paddleYCenter;
+                console.log(ballSpeedY);
+            }
+            else if (ballY > paddle1YCenter + 6 && ballY < paddle1YCenter + 25){
+                ballspeedY = (ballSpeedY * 2);
+                console.log(ballSpeedY);
+            }
+            else if (ballY > paddle1YCenter + 26 && ballY < paddle1YCenter + 45){
+                ballspeedY = (ballSpeedY * 2);
+                console.log(ballSpeedY);
+            }
             ballSpeedX = -ballSpeedX;
-            var deltaY = ballY - (paddle1Y + PADDLE_HEIGHT / 2);
-            ballSpeedY = deltaY * 0.35;
             numHits++;
             makePaddleNoise();
 
             if (numHits > 0) {
                 ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
-                ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
             }
         } else if (ballX < -20) {
             playerTwoScore++;
@@ -109,6 +130,42 @@ function moveEverything() {
         }
     if (ballX > 1180) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
+            if (ballY < paddle2Y + 17) {
+                if (ballSpeedY === 1 || ballSpeedY === -1) {
+                    originalBallSpeedY;
+                } else {
+                    ballSpeedY * 50;
+                }
+                console.log("top45"+ ballSpeedY);
+            }
+            if (ballY > paddle2Y + 18 && ballY < paddle2Y + 34){
+                if (ballSpeedY === 1 || ballSpeedY === -1) {
+                    originalBallSpeedY;
+                } else {
+                    ballSpeedY * 30;
+                }
+                console.log("top30"+ ballSpeedY);
+            }
+            if (ballY > paddle2Y + 35 && ballY < paddle2Y + 51){
+                ballSpeedY = 1;
+                console.log("0");
+            }
+            if (ballY > paddle2Y + 52 && ballY < paddle2Y + 68){
+                if (ballSpeedY === 1 || ballSpeedY === -1) {
+                    originalBallSpeedY;
+                } else {
+                    ballSpeedY * 30;
+                console.log("bottom30"+ ballSpeedY);
+                }
+            }
+            if (ballY > paddle2Y + 69 && ballY < paddle2Y + 85){
+                if (ballSpeedY === 1 || ballSpeedY === -1) {
+                    originalBallSpeedY;
+                } else {
+                    ballSpeedY * 50;
+                console.log("bottom45"+ ballSpeedY);
+                }
+            }
             ballSpeedX = -ballSpeedX;
             numHits++;
 
@@ -116,7 +173,6 @@ function moveEverything() {
 
                 if (numHits > 0) {
                     ballSpeedX = ballSpeedX * BALLSPEED_INCREASE;
-                    ballSpeedY = ballSpeedY * BALLSPEED_INCREASE;
                 }
         }
         else if (ballX > 1250) {
@@ -152,9 +208,9 @@ function calculateMousePos(evt) {
 function computerMovement() {
     var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
     if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 8;
+        paddle2Y += 20;
     } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 8;
+        paddle2Y -= 20;
     }
 }
 
