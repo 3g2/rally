@@ -12,8 +12,8 @@ const WINNING_SCORE = 5;
 var playerOneScore = 0;
 var playerTwoScore = 0;
 
-var ballX = 50;
-var ballY = 50;
+var ballX = 25;
+var ballY = 25;
 var ballSpeedX = 8;
 var ballSpeedY = 8;
 var originalBallSpeedY = 8;
@@ -93,27 +93,11 @@ function moveEverything() {
     
     if (ballX < 20) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
-            if (ballY < paddle1YCenter - 26 && ballY > paddle1YCenter - 45) {
-                ballspeedY = (ballSpeedY * 2);
-                console.log(ballSpeedY);
-
-            }
-            else if (ballY < paddle1YCenter -  6 && ballY > paddle1YCenter - 25){
-                ballspeedY = (ballSpeedY * 2);
-                console.log(ballSpeedY);
-            }
-            else if (ballY > paddle1YCenter - 5 && ballY < paddle1YCenter + 5){
-                paddleYCenter;
-                console.log(ballSpeedY);
-            }
-            else if (ballY > paddle1YCenter + 6 && ballY < paddle1YCenter + 25){
-                ballspeedY = (ballSpeedY * 2);
-                console.log(ballSpeedY);
-            }
-            else if (ballY > paddle1YCenter + 26 && ballY < paddle1YCenter + 45){
-                ballspeedY = (ballSpeedY * 2);
-                console.log(ballSpeedY);
-            }
+            
+            var deltaY = ballY
+            -(paddle2Y + PADDLE_HEIGHT/2);
+            ballSpeedY = deltaY * 0.35;
+            
             ballSpeedX = -ballSpeedX;
             numHits++;
             makePaddleNoise();
@@ -130,42 +114,11 @@ function moveEverything() {
         }
     if (ballX > 1180) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
-            if (ballY < paddle2Y + 17) {
-                if (ballSpeedY === 1 || ballSpeedY === -1) {
-                    originalBallSpeedY;
-                } else {
-                    ballSpeedY * 50;
-                }
-                console.log("top45"+ ballSpeedY);
-            }
-            if (ballY > paddle2Y + 18 && ballY < paddle2Y + 34){
-                if (ballSpeedY === 1 || ballSpeedY === -1) {
-                    originalBallSpeedY;
-                } else {
-                    ballSpeedY * 30;
-                }
-                console.log("top30"+ ballSpeedY);
-            }
-            if (ballY > paddle2Y + 35 && ballY < paddle2Y + 51){
-                ballSpeedY = 1;
-                console.log("0");
-            }
-            if (ballY > paddle2Y + 52 && ballY < paddle2Y + 68){
-                if (ballSpeedY === 1 || ballSpeedY === -1) {
-                    originalBallSpeedY;
-                } else {
-                    ballSpeedY * 30;
-                console.log("bottom30"+ ballSpeedY);
-                }
-            }
-            if (ballY > paddle2Y + 69 && ballY < paddle2Y + 85){
-                if (ballSpeedY === 1 || ballSpeedY === -1) {
-                    originalBallSpeedY;
-                } else {
-                    ballSpeedY * 50;
-                console.log("bottom45"+ ballSpeedY);
-                }
-            }
+            
+            var deltaY = ballY
+            -(paddle2Y + PADDLE_HEIGHT/2);
+            ballSpeedY = deltaY * 0.35;
+
             ballSpeedX = -ballSpeedX;
             numHits++;
 
