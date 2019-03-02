@@ -14,8 +14,8 @@ var playerTwoScore = 0;
 
 var ballX = 25;
 var ballY = 25;
-var ballSpeedX = 8;
-var ballSpeedY = 8;
+var ballSpeedX = 5;
+var ballSpeedY = 5;
 var originalBallSpeedY = 8;
 var ballServeSpeed = 8;
 const BALLSPEED_INCREASE = 1.04;
@@ -28,6 +28,7 @@ var savedRally = localStorage.getItem("highScore") || 0;
 var paddle1Y = 250;
 var paddle1YCenter;
 var paddle2Y = 250;
+var paddlePadding = 100;
 const PADDLE_HEIGHT = 90;
 const PADDLE_THICKNESS = 10;
 
@@ -50,6 +51,7 @@ function loadGame() {
                         moveEverything();
                     }
                 }, 1000 / fps);
+                ballReset();
         }
     });
     
@@ -91,7 +93,7 @@ function moveEverything() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
     
-    if (ballX < 20) {
+    if (ballX < 120) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             
             var deltaY = ballY
@@ -112,12 +114,12 @@ function moveEverything() {
             makeMissBallNoise();
             }
         }
-    if (ballX > 1180) {
+    if (ballX > 1080) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             
             var deltaY = ballY
             -(paddle2Y + PADDLE_HEIGHT/2);
-            ballSpeedY = deltaY * 0.35;
+            ballSpeedY = deltaY * 0.25;
 
             ballSpeedX = -ballSpeedX;
             numHits++;

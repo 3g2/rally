@@ -50,12 +50,12 @@ function drawWinScreenText() {
 }
 
 function drawBall(){
-    colorCircle(ballX, ballY, 10, 'white'); 
+    colorCircle(ballX, ballY, 7, 'white'); 
 }
 
 function drawPaddle() {
-    colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
-	colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+    colorRect(paddlePadding, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+	colorRect(canvas.width - paddlePadding, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 }
 
 function drawScoreBoard() {
