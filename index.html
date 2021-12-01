@@ -6,13 +6,17 @@
     <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bungee+Outline" rel="stylesheet"> 
 </head>
-<body>
-    <div id="motherboard">
-        <canvas id="gameCanvas" width="1200"; height="500"></canvas>
-        <script src='profile.js'></script>
-        <script src='index.js'></script>
-        <button id="mainMenu"> Main Menu </button>
-    </div>
+<body id="body">
+        <div id="container">
+            <div id="title"></div>
+            <div id="score" ></div>
+            <div id="currentScore"></div>
+            <div id="motherboard">
+            <canvas id="gameCanvas" width="1400"; height="500"></canvas>
+            <script src='profile.js'></script>
+            <script src='index.js'></script>
+            <button id="mainMenu"> Main Menu </button></div>
+        </div>
     <div id="sound">
         <audio src="soundEffects/paddleHit.wav" id="paddleHit"></audio>
         <audio src="soundEffects/wallHit.wav" id="wallHit"></audio>
