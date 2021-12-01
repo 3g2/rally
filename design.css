@@ -1,0 +1,58 @@
+html {
+    background: blue;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+#container {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#motherboard {
+    display: flex;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+}
+
+#gameCanvas {
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: auto;
+    display: block;
+    border-style: solid;
+    border-color: white;
+    border-width: 10px;
+}
+
+#mainMenu {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+    border-color: white;
+    border-style: solid;
+    border-width: 7px;
+    font-size: 50px;
+    font-family: "Bungee Outline", cursive;
+    color: white;
+    background-color: transparent;
+    padding: 10px; 
+    cursor: pointer;
+
+}
+
+@import url('https://fonts.googleapis.com/css?family=Bungee+Outline');
+@import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
+    
+
